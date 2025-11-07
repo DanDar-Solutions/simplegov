@@ -1,18 +1,19 @@
-import AppLayout from "@/components/layout/AppLayout";
 import SwipeWidget from "@/components/web/widgets/SwipeWidget";
-import { FetchNews } from "@/core/scrap";
-export default async function page() {
-  const data = await FetchNews()
-  const sampleData = [
-  { id: 1, title: "First item" },
-  { id: 2, title: "Second item" },
-  { id: 3, title: "Third item" },
-];
+import membersData from "./PM.json";
 
+type Member = {
+  id: number;
+  summary: string;
+  stats: string[];
+  region: string;
+};
 
+export default async function SwipePage() {
   return (
-    <AppLayout>
-      <SwipeWidget data={sampleData}/>
-    </AppLayout>
+    <div className="min-h-screen w-full flex items-center justify-center">
+      <div className="w-full max-w-[375px] px-4">
+        <SwipeWidget data={membersData as Member[]} />
+      </div>
+    </div>
   );
 }
