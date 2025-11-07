@@ -1,10 +1,10 @@
 "use client";
 
 import NewsFeed from "@/components/web/legits/NewFeeds";
-import type { NewsItemType } from "../../../static/news/schema/news"; 
+import type { ModernNewsItem } from "@/static/news/modern";
 
 interface HomeWidgetProps {
-  news: NewsItemType[]; 
+  news: ModernNewsItem[];
 }
 
 export default function HomeWidget({ news }: HomeWidgetProps) {
