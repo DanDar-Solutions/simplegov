@@ -1,5 +1,5 @@
 
-import Card from "@/components/web/Card";
+import Card from "@/components/web/UI/Card";
 import path from "path";
 import { promises as fs } from "fs";
 
