@@ -1,13 +1,36 @@
 import path from "path";
 import { promises as fs } from "fs";
-import type { NewsItemType } from "@/static/news/schema/news";
+import type { ModernNewsItem } from "@/static/news/modern";
 
-export async function FetchNews(): Promise<NewsItemType[]> {
-  const filePath = path.join(process.cwd(), "parliament.json");
+/**
+ * FetchNews returns simplified/modernized news items by reading
+ * the static JSON at src/static/news/data.json and mapping each
+ * raw item to a lightweight structure (summary excerpt instead of large content).
+ */
+export async function FetchNews(): Promise<ModernNewsItem[]> {
+  const filePath = path.join(process.cwd(), "src", "static", "news", "data.json");
 
   try {
     const fileContents = await fs.readFile(filePath, "utf-8");
-    const news: NewsItemType[] = JSON.parse(fileContents);
+    // original file is an array of large items with `content` field
+    const raw: any[] = JSON.parse(fileContents);
+
+    const news: ModernNewsItem[] = raw.map((it) => {
+      // Build a short plain-text summary (strip HTML tags if present)
+      const content = typeof it.content === "string" ? it.content : "";
+      const plain = content.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
+      const summary = plain.length > 240 ? plain.slice(0, 240) + "..." : plain;
+
+      return {
+        id: String(it.id ?? it._id ?? Math.random().toString(36).slice(2, 9)),
+        title: String(it.title ?? "Untitled"),
+        summary,
+        date: String(it.date ?? new Date().toISOString()),
+        category: it.category ?? undefined,
+        url: it.url ?? undefined,
+      };
+    });
+
     return news;
   } catch (err) {
     console.error("[FetchNews] Failed to read or parse JSON:", err);

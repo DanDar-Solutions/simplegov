@@ -1,6 +1,6 @@
 "use client";
 
-import ProfileInformation1 from "../legits/ProfileInformation1";
+import ProfileInformation1 from "../legits/ProfileInformation";
 import ProfileInformation2 from "../legits/ProfileInformation2";
 import { ProfileSection } from "../legits/ProfileSection";
 
