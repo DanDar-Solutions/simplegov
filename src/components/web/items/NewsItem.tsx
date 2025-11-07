@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { NewsItemType } from "@/static/types/news";
+import { NewsItemType } from "@/static/news/schema/news";
 
 export default function NewsItem({
   id,

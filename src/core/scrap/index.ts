@@ -1,6 +1,6 @@
 import path from "path";
 import { promises as fs } from "fs";
-import type { NewsItemType } from "@/static/types/news";
+import type { NewsItemType } from "@/static/news/schema/news";
 
 export async function FetchNews(): Promise<NewsItemType[]> {
   const filePath = path.join(process.cwd(), "parliament.json");

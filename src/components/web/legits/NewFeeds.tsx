@@ -1,4 +1,4 @@
-import { NewsItemType } from "@/static/types/news";
+import { NewsItemType } from "@/static/news/schema/news";
 import NewsItem from "../items/NewsItem";
 
 export interface NewsFeedProps {
