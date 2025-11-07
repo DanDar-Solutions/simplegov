@@ -1,48 +1,41 @@
-import React from "react";
-import { getDatabase } from "@/lib/database";
-import Card from "@/components/web/Card";
 
-type DbStatus = {
-  ok: number;
-} | {
-  error: string;
-};
+import Card from "@/components/web/Card";
+import path from "path";
+import { promises as fs } from "fs";
 
 export default async function AdminPage() {
-  let status: DbStatus = { error: "unknown" };
+  // Pick the file to read from src/static
+  const fileName = "Төрийн мэдээлэл-2025 он.json";
+  const filePath = path.join(process.cwd(), "src", "static", fileName);
+  let data: unknown = null;
+  let error: string | null = null;
 
   try {
-    // Use env DB name if provided, otherwise use 'admin'
-    const dbName = process.env.MONGO_DB_NAME || "admin";
-    const db = await getDatabase(dbName);
-
-    // Run a ping command to ensure connectivity
-    // The MongoDB Node driver supports db.command({ ping: 1 }) which returns { ok: 1 } on success
-    // If the command fails an exception will be thrown and caught below
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const res = (await (db.command as any)({ ping: 1 }));
-
-    if (res && typeof res.ok === "number") {
-      status = { ok: res.ok };
-    } else {
-      status = { error: "unexpected response" };
-    }
-  } catch (err: unknown) {
-    const message = err instanceof Error ? err.message : String(err);
-    status = { error: message };
+    const file = await fs.readFile(filePath, "utf-8");
+    data = JSON.parse(file);
+  } catch (e) {
+    error = e instanceof Error ? e.message : String(e);
   }
 
   return (
-    <main style={{ maxWidth: 900, margin: "40px auto", padding: "0 16px" }}>
-      <h1>Admin</h1>
-      <Card title="Database connection status">
-        <div style={{ minHeight: 60 }}>
-          {"ok" in status ? (
-            <div style={{ color: status.ok === 1 ? "green" : "orange" }}>
-              Connected (ok: {status.ok})
-            </div>
+    <main style={{ maxWidth: 900, margin: "40px auto", padding: "0 16px", color: "#000" }}>
+      <h1 style={{ color: "#000" }}>Admin - JSON Data View</h1>
+      <Card title={`Static JSON: ${fileName}`}>
+        <div style={{ minHeight: 60, color: "#000" }}>
+          {error ? (
+            <div style={{ color: "crimson" }}>Error: {error}</div>
+          ) : Array.isArray(data) ? (
+            data.map((item, index) => (
+              <p key={index}>{JSON.stringify(item)}</p>
+            ))
+          ) : data && typeof data === "object" ? (
+            Object.entries(data as Record<string, unknown>).map(([key, value], index) => (
+              <p key={index}>
+                <strong>{key}:</strong> {JSON.stringify(value)}
+              </p>
+            ))
           ) : (
-            <div style={{ color: "crimson" }}>Not connected: {status.error}</div>
+            <span>No data found.</span>
           )}
         </div>
       </Card>
