@@ -1,9 +1,11 @@
 import AppLayout from "@/components/layout/AppLayout";
 import HomeWidget from "@/components/web/widgets/HomeWidget";
-export default function Home() {
+import { FetchNews } from "@/core/scrap";
+export default async function Home() {
+  const news = await FetchNews()
   return (
     <AppLayout>
-      <HomeWidget/>
+      <HomeWidget news={news}/>
     </AppLayout>
   );
 }

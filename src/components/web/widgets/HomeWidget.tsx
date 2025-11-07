@@ -1,9 +1,12 @@
-import NewsFeed from "../legits/newsFeed";
+"use client";
 
-export default function HomeWidget() {
-  return (
-    <>
-    <NewsFeed news={[]}/>
-    </>
-  )
+import NewsFeed from "@/components/web/legits/NewFeeds";
+import type { NewsItemType } from "../../../static/types/news"; 
+
+interface HomeWidgetProps {
+  news: NewsItemType[]; 
+}
+
+export default function HomeWidget({ news }: HomeWidgetProps) {
+  return <NewsFeed news={news} />;
 }
