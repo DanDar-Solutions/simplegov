@@ -8,12 +8,12 @@ export  function Header() {
         <Link href="/" style={{ textDecoration: "none", color: "inherit", fontWeight: 700 }}>
           SimpleGov
         </Link>
-
+        <div>
+          {/* hamburger here */}
+        </div>
         <nav>
-          <Link href="/" style={{ marginRight: 12 }}>
-            Home
-          </Link>
-          <Link href="/about">About</Link>
+          <Link href="/swipe">Swipe</Link>
+          <Link href="/news">News</Link>
         </nav>
       </div>
     </header>
