@@ -5,7 +5,6 @@ export default async function page() {
   const data = await FetchNews()
   return (
     <AppLayout>
-      <ResultWidget data={data}/>
-    </AppLayout>
+asd    </AppLayout>
   );
 }

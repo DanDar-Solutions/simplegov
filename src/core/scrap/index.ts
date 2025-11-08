@@ -9,7 +9,7 @@ export async function FetchNews(): Promise<ModernNewsItem[]> {
     const fileContents = await fs.readFile(filePath, "utf-8");
     const raw: any[] = JSON.parse(fileContents);
 
-    const news: ModernNewsItem[] = raw.map((it) => {
+    const news: ModernNewsItem[] = raw.map((it, idx) => {
       const content = typeof it.content === "string" ? it.content : "";
       const plain = content.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
       const summary = plain.length > 240 ? plain.slice(0, 240) + "..." : plain;
@@ -21,6 +21,7 @@ export async function FetchNews(): Promise<ModernNewsItem[]> {
         date: String(it.date ?? new Date().toISOString()),
         category: it.category ?? undefined,
         url: it.url ?? undefined,
+        i: typeof it.i === "number" ? it.i : idx,
       };
     });
 

@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 :root {
-  --color-bg: hsl(0, 0%, 10%);
+  --color-bg: hsl(0, 0%, 41%);
 
   --textDefault: hsl(0, 0%, 100%);
   --textL: hsl(0, 0%, 90%);
