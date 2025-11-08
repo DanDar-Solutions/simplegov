@@ -1,6 +1,6 @@
 
 export default function page() {
   return (
-    <div className='text-green-700'>Get Started</div>
+    <div className='a'>Get Started</div>
   )
 }
