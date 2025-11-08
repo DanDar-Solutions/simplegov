@@ -30,16 +30,11 @@ export function Header() {
         </Link>
         <button
           onClick={() => setIsMenuOpen(!isMenuOpen)}
-          style={{
-            display: "block",
-            background: "none",
-            border: "none",
-            cursor: "pointer",
-            fontSize: 24,
-          }}
+          className="block bg-transparent border-none cursor-pointer text-2xl md:hidden"
         >
           ☰
         </button>
+
         <nav
           style={{
             display: "none",
@@ -56,7 +51,7 @@ export function Header() {
       </div>
 {/* Mobile navigation dropdown */}
 {isMenuOpen && (
-  <nav className="flex flex-col mt-3 absolute right-2 bg-blue-200/50 rounded-lg shadow-lg p-4 w-48 z-50">
+  <nav className="flex flex-col mt-3 absolute right-2 bg-blue-200 text-black rounded-lg shadow-lg p-4 w-48 z-50">
     <Link 
       href="/swipe" 
       className="px-1 py-1 text-center border-b hover:bg-blue-300 transition-colors"
