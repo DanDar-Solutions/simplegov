@@ -7,9 +7,9 @@ export interface NewsFeedProps {
 
 export default function NewsFeed({ news }: NewsFeedProps) {
   return (
-    <section className="news-feed divide-y divide-gray-200">
-      {news.map((item) => (
-        <NewsItem key={item.id} {...item} />
+    <section className="news-feed divide-y divide-gray-200 flex flex-col gap-8">
+      {news.map((item, i) => (
+        <NewsItem key={item.id} {...item} i={i} />
       ))}
     </section>
   );

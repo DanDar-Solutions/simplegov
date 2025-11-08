@@ -5,6 +5,7 @@ export type ModernNewsItem = {
   date: string; // ISO date
   category?: string;
   url?: string;
+  i: number;
 };
 
 export default ModernNewsItem;

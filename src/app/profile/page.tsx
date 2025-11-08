@@ -4,8 +4,11 @@ import { FetchNews } from "@/core/scrap";
 export default async function page() {
   const profile = await FetchNews()
   return (
-    <AppLayout>
-      <ProfileWidget profile={profile}/>
-    </AppLayout>
-  );
+    <div >404</div>
+  )
+  // return (
+  //   <AppLayout>
+  //     <ProfileWidget profile={profile}/>
+  //   </AppLayout>
+  // );
 }

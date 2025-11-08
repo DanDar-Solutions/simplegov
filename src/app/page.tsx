@@ -1,6 +1,14 @@
+import Link from "next/link";
 
-export default function page() {
+export default function Page() {
   return (
-    <div className='text-green-700'>Get Started</div>
-  )
+    <div className="flex h-screen items-center justify-center bg-white">
+      <Link
+        href="/swipe"
+        className="flex h-16 w-16 items-center justify-center rounded-full bg-green-600 text-gray-100 text-lg font-semibold shadow-md hover:bg-green-700 hover:shadow-lg transition-all"
+      >
+        Go
+      </Link>
+    </div>
+  );
 }
